@@ -1,38 +1,40 @@
 import { useEffect } from 'react';
 import { motion } from 'framer-motion';
 import type { Round } from '../../data/vocabulary.types';
+import type { VocabularyItem, CardSide } from '../../data/vocabulary.types';
 import { Card } from '../ui/Card';
 import { FeedbackOverlay } from './FeedbackOverlay';
 import { ProgressBar } from './ProgressBar';
 import { ScoreCounter } from '../ui/ScoreCounter';
 
-// corners array is ordered [top-left, top-right, bottom-left, bottom-right]
-// we remap to diamond positions: top, right, bottom, left
-type DiamondPos = 'top' | 'right' | 'bottom' | 'left';
-
+// corners[] is ordered [top-left, top-right, bottom-left, bottom-right]
+// diamond mapping: index 0 → top (W/↑), 1 → right (D/→), 2 → bottom (S/↓), 3 → left (A/←)
 const CORNER_IDS = ['top-left', 'top-right', 'bottom-left', 'bottom-right'] as const;
-const DIAMOND_POSITIONS: DiamondPos[] = ['top', 'right', 'bottom', 'left'];
 
-const positionClasses: Record<DiamondPos, string> = {
-  top: 'absolute top-[18%] left-1/2 -translate-x-1/2',
-  right: 'absolute right-[3%] top-1/2 -translate-y-1/2',
-  bottom: 'absolute bottom-[20%] left-1/2 -translate-x-1/2',
-  left: 'absolute left-[3%] top-1/2 -translate-y-1/2',
-};
+const KEY_HINTS = ['↑ W', '→ D', '↓ S', '← A'];
 
-const KEY_HINTS: Record<DiamondPos, string> = {
-  top: '↑ W',
-  right: '→ D',
-  bottom: '↓ S',
-  left: '← A',
-};
+interface TargetProps {
+  item: VocabularyItem;
+  mode: CardSide;
+  cornerId: string;
+  hint: string;
+  accentColor?: string;
+  disabled: boolean;
+  onSelect: (id: string) => void;
+}
 
-const KEY_HINT_CLASS: Record<DiamondPos, string> = {
-  top: 'absolute -bottom-5 left-1/2 -translate-x-1/2 whitespace-nowrap',
-  right: 'absolute -bottom-5 left-1/2 -translate-x-1/2 whitespace-nowrap',
-  bottom: 'absolute -bottom-5 left-1/2 -translate-x-1/2 whitespace-nowrap',
-  left: 'absolute -bottom-5 left-1/2 -translate-x-1/2 whitespace-nowrap',
-};
+function DiamondTarget({ item, mode, cornerId, hint, accentColor, disabled, onSelect }: TargetProps) {
+  return (
+    <button
+      onClick={() => !disabled && onSelect(cornerId)}
+      className="flex flex-col items-center gap-1.5"
+      style={{ cursor: disabled ? 'default' : 'pointer' }}
+    >
+      <Card item={item} mode={mode} size="diamond" accentColor={accentColor} />
+      <span className="text-[10px] font-medium" style={{ color: 'var(--text-muted)' }}>{hint}</span>
+    </button>
+  );
+}
 
 interface Props {
   round: Round;
@@ -51,68 +53,93 @@ export function DiamondBoard({ round, feedback, shakeKey, score, streak, complet
     if (feedback) return;
 
     const handleKey = (e: KeyboardEvent) => {
-      let posIndex = -1;
+      let i = -1;
       switch (e.key) {
-        case 'ArrowUp':    case 'w': case 'W': posIndex = 0; break;
-        case 'ArrowRight': case 'd': case 'D': posIndex = 1; break;
-        case 'ArrowDown':  case 's': case 'S': posIndex = 2; break;
-        case 'ArrowLeft':  case 'a': case 'A': posIndex = 3; break;
+        case 'ArrowUp':    case 'w': case 'W': i = 0; break;
+        case 'ArrowRight': case 'd': case 'D': i = 1; break;
+        case 'ArrowDown':  case 's': case 'S': i = 2; break;
+        case 'ArrowLeft':  case 'a': case 'A': i = 3; break;
         default: return;
       }
       e.preventDefault();
-      const corner = round.corners[posIndex];
-      onSelect(`${CORNER_IDS[posIndex]}-${corner.id}`);
+      onSelect(`${CORNER_IDS[i]}-${round.corners[i].id}`);
     };
 
     window.addEventListener('keydown', handleKey);
     return () => window.removeEventListener('keydown', handleKey);
   }, [round, feedback, onSelect]);
 
+  const makeId = (i: number) => `${CORNER_IDS[i]}-${round.corners[i].id}`;
+  const disabled = !!feedback;
+
   return (
-    <div className="relative w-full h-full" style={{ background: 'var(--bg-primary)' }}>
-      <div className="absolute top-0 left-0 right-0 px-4 pt-3 z-20">
-        <ProgressBar completed={completed} total={total} />
-      </div>
-      <div className="absolute top-3 right-4 z-20">
+    <div className="relative w-full h-full flex flex-col" style={{ background: 'var(--bg-primary)' }}>
+
+      {/* Header: progress + score */}
+      <div className="flex items-center px-4 pt-3 pb-2 gap-3 z-20">
+        <div className="flex-1">
+          <ProgressBar completed={completed} total={total} />
+        </div>
         <ScoreCounter streak={streak} score={score} total={total} />
       </div>
 
-      {DIAMOND_POSITIONS.map((diamondPos, i) => {
-        const corner = round.corners[i];
-        const cornerId = `${CORNER_IDS[i]}-${corner.id}`;
-        return (
-          <button
-            key={cornerId}
-            className={`${positionClasses[diamondPos]} z-10`}
-            onClick={() => !feedback && onSelect(cornerId)}
-            style={{ cursor: feedback ? 'default' : 'pointer' }}
-          >
-            <div className="relative">
-              <Card
-                item={corner}
-                mode={round.answerMode}
-                size="diamond"
-                accentColor={accentColor}
-              />
-              <span
-                className={`${KEY_HINT_CLASS[diamondPos]} text-[10px] font-medium`}
-                style={{ color: 'var(--text-muted)' }}
-              >
-                {KEY_HINTS[diamondPos]}
-              </span>
-            </div>
-          </button>
-        );
-      })}
+      {/* Diamond layout: flex column, equal space */}
+      <div className="flex-1 flex flex-col items-center justify-around pb-4">
 
-      <motion.div
-        key={shakeKey}
-        animate={shakeKey > 0 ? { x: [0, -10, 10, -10, 10, 0] } : { x: 0 }}
-        transition={{ duration: 0.4 }}
-        className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 z-10"
-      >
-        <Card item={round.question} mode={round.questionMode} size="center" accentColor={accentColor} />
-      </motion.div>
+        {/* Top answer */}
+        <DiamondTarget
+          item={round.corners[0]}
+          mode={round.answerMode}
+          cornerId={makeId(0)}
+          hint={KEY_HINTS[0]}
+          accentColor={accentColor}
+          disabled={disabled}
+          onSelect={onSelect}
+        />
+
+        {/* Middle row: left — center — right */}
+        <div className="flex items-center justify-center gap-4 w-full px-4">
+          <DiamondTarget
+            item={round.corners[3]}
+            mode={round.answerMode}
+            cornerId={makeId(3)}
+            hint={KEY_HINTS[3]}
+            accentColor={accentColor}
+            disabled={disabled}
+            onSelect={onSelect}
+          />
+
+          <motion.div
+            key={shakeKey}
+            animate={shakeKey > 0 ? { x: [0, -10, 10, -10, 10, 0] } : { x: 0 }}
+            transition={{ duration: 0.4 }}
+          >
+            <Card item={round.question} mode={round.questionMode} size="corner" accentColor={accentColor} />
+          </motion.div>
+
+          <DiamondTarget
+            item={round.corners[1]}
+            mode={round.answerMode}
+            cornerId={makeId(1)}
+            hint={KEY_HINTS[1]}
+            accentColor={accentColor}
+            disabled={disabled}
+            onSelect={onSelect}
+          />
+        </div>
+
+        {/* Bottom answer */}
+        <DiamondTarget
+          item={round.corners[2]}
+          mode={round.answerMode}
+          cornerId={makeId(2)}
+          hint={KEY_HINTS[2]}
+          accentColor={accentColor}
+          disabled={disabled}
+          onSelect={onSelect}
+        />
+
+      </div>
 
       <FeedbackOverlay result={feedback} />
     </div>
