@@ -1,0 +1,155 @@
+{
+  "version": 1,
+  "sentences": [
+    {
+      "id": "s001",
+      "englishTemplate": "I am {0} and {1}",
+      "slots": [
+        { "position": 0, "correctItemId": "im-hungry" },
+        { "position": 1, "correctItemId": "im-thirsty" }
+      ],
+      "distractorItemIds": ["im-tired", "im-good", "how-are-you"],
+      "difficulty": 1
+    },
+    {
+      "id": "s002",
+      "englishTemplate": "I'll have the {0} and {1} please",
+      "slots": [
+        { "position": 0, "correctItemId": "rice" },
+        { "position": 1, "correctItemId": "water" }
+      ],
+      "distractorItemIds": ["tea", "coffee", "chicken"],
+      "difficulty": 1
+    },
+    {
+      "id": "s003",
+      "englishTemplate": "Turn {0}, then go {1}",
+      "slots": [
+        { "position": 0, "correctItemId": "left" },
+        { "position": 1, "correctItemId": "straight" }
+      ],
+      "distractorItemIds": ["right", "stop", "go"],
+      "difficulty": 1
+    },
+    {
+      "id": "s004",
+      "englishTemplate": "Take a {0} to the {1}",
+      "slots": [
+        { "position": 0, "correctItemId": "taxi" },
+        { "position": 1, "correctItemId": "airport" }
+      ],
+      "distractorItemIds": ["bus", "train", "hotel"],
+      "difficulty": 2
+    },
+    {
+      "id": "s005",
+      "englishTemplate": "{0}! {1}!",
+      "slots": [
+        { "position": 0, "correctItemId": "good-morning" },
+        { "position": 1, "correctItemId": "good-luck" }
+      ],
+      "distractorItemIds": ["good-night", "congratulations", "be-careful"],
+      "difficulty": 1
+    },
+    {
+      "id": "s006",
+      "englishTemplate": "{0}! {1}!",
+      "slots": [
+        { "position": 0, "correctItemId": "help" },
+        { "position": 1, "correctItemId": "stop" }
+      ],
+      "distractorItemIds": ["go", "bathroom", "wait-a-moment"],
+      "difficulty": 2
+    },
+    {
+      "id": "s007",
+      "englishTemplate": "Today I want {0} and {1}",
+      "slots": [
+        { "position": 0, "correctItemId": "rice" },
+        { "position": 1, "correctItemId": "chicken" }
+      ],
+      "distractorItemIds": ["water", "fish", "beef"],
+      "difficulty": 1
+    },
+    {
+      "id": "s008",
+      "englishTemplate": "See you {0} at the {1}",
+      "slots": [
+        { "position": 0, "correctItemId": "tomorrow" },
+        { "position": 1, "correctItemId": "hotel" }
+      ],
+      "distractorItemIds": ["today", "yesterday", "airport"],
+      "difficulty": 2
+    },
+    {
+      "id": "s009",
+      "englishTemplate": "I'll have {0} {1}",
+      "slots": [
+        { "position": 0, "correctItemId": "three" },
+        { "position": 1, "correctItemId": "fish" }
+      ],
+      "distractorItemIds": ["two", "four", "chicken", "rice"],
+      "difficulty": 2
+    },
+    {
+      "id": "s010",
+      "englishTemplate": "{0}, then {1}!",
+      "slots": [
+        { "position": 0, "correctItemId": "sit-down" },
+        { "position": 1, "correctItemId": "lets-eat" }
+      ],
+      "distractorItemIds": ["come-here", "wait-a-moment", "be-careful"],
+      "difficulty": 2
+    },
+    {
+      "id": "s011",
+      "englishTemplate": "Is it {0} or {1}?",
+      "slots": [
+        { "position": 0, "correctItemId": "left" },
+        { "position": 1, "correctItemId": "right" }
+      ],
+      "distractorItemIds": ["straight", "stop", "go"],
+      "difficulty": 1
+    },
+    {
+      "id": "s012",
+      "englishTemplate": "I'm not {0}, I'm {1}",
+      "slots": [
+        { "position": 0, "correctItemId": "im-good" },
+        { "position": 1, "correctItemId": "im-tired" }
+      ],
+      "distractorItemIds": ["im-hungry", "im-thirsty", "how-are-you"],
+      "difficulty": 2
+    },
+    {
+      "id": "s013",
+      "englishTemplate": "{0}! The {1} is delicious!",
+      "slots": [
+        { "position": 0, "correctItemId": "good-morning" },
+        { "position": 1, "correctItemId": "rice" }
+      ],
+      "distractorItemIds": ["good-night", "chicken", "beef"],
+      "difficulty": 2
+    },
+    {
+      "id": "s014",
+      "englishTemplate": "Take the {0} or the {1}?",
+      "slots": [
+        { "position": 0, "correctItemId": "bus" },
+        { "position": 1, "correctItemId": "train" }
+      ],
+      "distractorItemIds": ["taxi", "airport", "hotel"],
+      "difficulty": 1
+    },
+    {
+      "id": "s015",
+      "englishTemplate": "Say {0}, see you {1}",
+      "slots": [
+        { "position": 0, "correctItemId": "goodbye" },
+        { "position": 1, "correctItemId": "tomorrow" }
+      ],
+      "distractorItemIds": ["see-you-later", "today", "later"],
+      "difficulty": 1
+    }
+  ]
+}

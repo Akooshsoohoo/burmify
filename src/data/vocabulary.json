@@ -1,0 +1,141 @@
+{
+  "version": 2,
+  "categories": [
+    {
+      "id": "greetings",
+      "label": "Greetings & Basics",
+      "description": "Essential greetings, politeness, and basic phrases",
+      "color": "#e76f51",
+      "icon": "👋",
+      "items": [
+        { "id": "mingalaba", "category": "greetings", "burmese": "မင်္ဂလာပါ", "romanization": "mingalaba", "phonetic": "ming ahh lah bah", "english": "hello", "image": "greetings/hello.svg", "audio": "", "difficulty": 1, "tags": ["greeting"] },
+        { "id": "hi", "category": "greetings", "burmese": "ဟယ်လို", "romanization": "hello", "phonetic": "heh loh", "english": "hi", "image": "greetings/hi.svg", "audio": "", "difficulty": 1, "tags": ["greeting"] },
+        { "id": "goodbye", "category": "greetings", "burmese": "သွားတော့မယ်", "romanization": "thwa dot meh", "phonetic": "thwah doht meh", "english": "goodbye", "image": "greetings/goodbye.svg", "audio": "", "difficulty": 1, "tags": ["farewell"] },
+        { "id": "see-you-later", "category": "greetings", "burmese": "နောက်မှတွေ့မယ်", "romanization": "nauk hma twe meh", "phonetic": "nowk hma tway meh", "english": "see you later", "image": "greetings/seeyoulater.svg", "audio": "", "difficulty": 2, "tags": ["farewell"] },
+        { "id": "thank-you", "category": "greetings", "burmese": "ကျေးဇူးတင်ပါတယ်", "romanization": "kyeizu tin ba deh", "phonetic": "jay zoo tin bah deh", "english": "thank you", "image": "greetings/thankyou.svg", "audio": "", "difficulty": 1, "tags": ["polite"] },
+        { "id": "youre-welcome", "category": "greetings", "burmese": "ရပါတယ်", "romanization": "ya ba deh", "phonetic": "yah bah deh", "english": "you're welcome", "image": "greetings/welcome.svg", "audio": "", "difficulty": 2, "tags": ["polite"] },
+        { "id": "sorry", "category": "greetings", "burmese": "ဆောရီး", "romanization": "sorry", "phonetic": "saw ree", "english": "sorry", "image": "greetings/sorry.svg", "audio": "", "difficulty": 1, "tags": ["polite"] },
+        { "id": "excuse-me", "category": "greetings", "burmese": "ခွင့်လွှတ်ပါ", "romanization": "khwin hlut ba", "phonetic": "khwint hloot bah", "english": "excuse me", "image": "greetings/excuseme.svg", "audio": "", "difficulty": 2, "tags": ["polite"] },
+        { "id": "please", "category": "greetings", "burmese": "ကျေးဇူးပြုပြီး", "romanization": "kyeizu pyu bi", "phonetic": "jay zoo pyu bee", "english": "please", "image": "greetings/please.svg", "audio": "", "difficulty": 1, "tags": ["polite"] },
+        { "id": "yes", "category": "greetings", "burmese": "ဟုတ်ကဲ့", "romanization": "hote keh", "phonetic": "hoht keh", "english": "yes", "image": "greetings/yes.svg", "audio": "", "difficulty": 1, "tags": ["basic"] },
+        { "id": "no", "category": "greetings", "burmese": "မဟုတ်ဘူး", "romanization": "ma hote bu", "phonetic": "muh hoht boo", "english": "no", "image": "greetings/no.svg", "audio": "", "difficulty": 1, "tags": ["basic"] },
+        { "id": "okay", "category": "greetings", "burmese": "အိုကေ", "romanization": "okay", "phonetic": "oh kay", "english": "okay", "image": "greetings/okay.svg", "audio": "", "difficulty": 1, "tags": ["basic"] },
+        { "id": "i-understand", "category": "greetings", "burmese": "နားလည်ပါတယ်", "romanization": "na le ba deh", "phonetic": "nah leh bah deh", "english": "I understand", "image": "greetings/understand.svg", "audio": "", "difficulty": 2, "tags": ["phrase"] },
+        { "id": "i-dont-understand", "category": "greetings", "burmese": "နားမလည်ဘူး", "romanization": "na ma le bu", "phonetic": "nah muh leh boo", "english": "I don't understand", "image": "greetings/dontunderstand.svg", "audio": "", "difficulty": 2, "tags": ["phrase"] },
+        { "id": "speak-slowly", "category": "greetings", "burmese": "ဖြည်းဖြည်းပြောပါ", "romanization": "phyay phyay pyaw ba", "phonetic": "pyay pyay pyaw bah", "english": "speak slowly", "image": "greetings/slowly.svg", "audio": "", "difficulty": 2, "tags": ["phrase"] },
+        { "id": "repeat", "category": "greetings", "burmese": "ထပ်ပြောပါ", "romanization": "htat pyaw ba", "phonetic": "htaht pyaw bah", "english": "can you repeat that?", "image": "greetings/repeat.svg", "audio": "", "difficulty": 2, "tags": ["phrase"] },
+        { "id": "whats-your-name", "category": "greetings", "burmese": "နာမည်ဘာလဲ", "romanization": "namay ba leh", "phonetic": "nah may bah leh", "english": "what is your name?", "image": "greetings/name.svg", "audio": "", "difficulty": 2, "tags": ["question"] },
+        { "id": "nice-to-meet-you", "category": "greetings", "burmese": "တွေ့ရတာဝမ်းသာပါတယ်", "romanization": "twe ya da wun thar ba deh", "phonetic": "tway yah dah wunn thah bah deh", "english": "nice to meet you", "image": "greetings/nicetomeet.svg", "audio": "", "difficulty": 2, "tags": ["greeting"] },
+        { "id": "how-are-you", "category": "greetings", "burmese": "နေကောင်းလား", "romanization": "nay kaung lar", "phonetic": "nay kowng lah", "english": "how are you?", "image": "greetings/howareyou.svg", "audio": "", "difficulty": 1, "tags": ["greeting"] },
+        { "id": "im-good", "category": "greetings", "burmese": "နေကောင်းပါတယ်", "romanization": "nay kaung ba deh", "phonetic": "nay kowng bah deh", "english": "I'm good", "image": "greetings/good.svg", "audio": "", "difficulty": 1, "tags": ["response"] },
+        { "id": "im-tired", "category": "greetings", "burmese": "ပင်ပန်းတယ်", "romanization": "pin ban deh", "phonetic": "pin bahn deh", "english": "I'm tired", "image": "greetings/tired.svg", "audio": "", "difficulty": 2, "tags": ["state"] },
+        { "id": "im-hungry", "category": "greetings", "burmese": "ဗိုက်ဆာတယ်", "romanization": "bite sar deh", "phonetic": "byke sah deh", "english": "I am hungry", "image": "greetings/hungry.svg", "audio": "", "difficulty": 2, "tags": ["state"] },
+        { "id": "im-thirsty", "category": "greetings", "burmese": "ရေငတ်တယ်", "romanization": "yay ngat deh", "phonetic": "yay ngaht deh", "english": "I am thirsty", "image": "greetings/thirsty.svg", "audio": "", "difficulty": 2, "tags": ["state"] },
+        { "id": "i-love-you", "category": "greetings", "burmese": "မင်းကိုချစ်တယ်", "romanization": "min go chit deh", "phonetic": "min go chit deh", "english": "I love you", "image": "greetings/love.svg", "audio": "", "difficulty": 2, "tags": ["emotion"] }
+      ]
+    },
+    {
+      "id": "questions",
+      "label": "Questions",
+      "description": "Essential question words",
+      "color": "#9b5de5",
+      "icon": "❓",
+      "items": [
+        { "id": "what", "category": "questions", "burmese": "ဘာလဲ", "romanization": "ba leh", "phonetic": "bah leh", "english": "what?", "image": "questions/what.svg", "audio": "", "difficulty": 1, "tags": ["question"] },
+        { "id": "where", "category": "questions", "burmese": "ဘယ်မှာလဲ", "romanization": "beh hma leh", "phonetic": "beh hma leh", "english": "where?", "image": "questions/where.svg", "audio": "", "difficulty": 1, "tags": ["question"] },
+        { "id": "when", "category": "questions", "burmese": "ဘယ်တော့လဲ", "romanization": "beh dau leh", "phonetic": "beh daw leh", "english": "when?", "image": "questions/when.svg", "audio": "", "difficulty": 1, "tags": ["question"] },
+        { "id": "why", "category": "questions", "burmese": "ဘာကြောင့်လဲ", "romanization": "ba kyawng leh", "phonetic": "bah chyowng leh", "english": "why?", "image": "questions/why.svg", "audio": "", "difficulty": 1, "tags": ["question"] },
+        { "id": "who", "category": "questions", "burmese": "ဘယ်သူလဲ", "romanization": "beh thu leh", "phonetic": "beh thoo leh", "english": "who?", "image": "questions/who.svg", "audio": "", "difficulty": 1, "tags": ["question"] },
+        { "id": "how", "category": "questions", "burmese": "ဘယ်လိုလဲ", "romanization": "beh lo leh", "phonetic": "beh loh leh", "english": "how?", "image": "questions/how.svg", "audio": "", "difficulty": 1, "tags": ["question"] },
+        { "id": "how-much", "category": "questions", "burmese": "ဘယ်လောက်လဲ", "romanization": "beh laut leh", "phonetic": "beh lowt leh", "english": "how much?", "image": "questions/howmuch.svg", "audio": "", "difficulty": 2, "tags": ["question"] },
+        { "id": "which-one", "category": "questions", "burmese": "ဘယ်ဟာလဲ", "romanization": "beh har leh", "phonetic": "beh hah leh", "english": "which one?", "image": "questions/which.svg", "audio": "", "difficulty": 2, "tags": ["question"] }
+      ]
+    },
+    {
+      "id": "food",
+      "label": "Food & Restaurant",
+      "description": "Ordering food and dining out",
+      "color": "#f4a261",
+      "icon": "🍜",
+      "items": [
+        { "id": "water", "category": "food", "burmese": "ရေ", "romanization": "yay", "phonetic": "yay", "english": "water", "image": "food/water.svg", "audio": "", "difficulty": 1, "tags": ["drink"] },
+        { "id": "rice", "category": "food", "burmese": "ထမင်း", "romanization": "hta min", "phonetic": "htah min", "english": "rice", "image": "food/rice.svg", "audio": "", "difficulty": 1, "tags": ["food"] },
+        { "id": "chicken", "category": "food", "burmese": "ကြက်သား", "romanization": "kyet thar", "phonetic": "chet thah", "english": "chicken", "image": "food/chicken.svg", "audio": "", "difficulty": 1, "tags": ["food"] },
+        { "id": "beef", "category": "food", "burmese": "အမဲသား", "romanization": "a me thar", "phonetic": "ah meh thah", "english": "beef", "image": "food/beef.svg", "audio": "", "difficulty": 2, "tags": ["food"] },
+        { "id": "fish", "category": "food", "burmese": "ငါး", "romanization": "ngar", "phonetic": "ngah", "english": "fish", "image": "food/fish.svg", "audio": "", "difficulty": 1, "tags": ["food"] },
+        { "id": "tea", "category": "food", "burmese": "လက်ဖက်ရည်", "romanization": "lahpet yay", "phonetic": "la pet yay", "english": "tea", "image": "food/tea.svg", "audio": "", "difficulty": 1, "tags": ["drink"] },
+        { "id": "coffee", "category": "food", "burmese": "ကော်ဖီ", "romanization": "coffee", "phonetic": "kaw fee", "english": "coffee", "image": "food/coffee.svg", "audio": "", "difficulty": 1, "tags": ["drink"] },
+        { "id": "delicious", "category": "food", "burmese": "အရမ်းကောင်းတယ်", "romanization": "a yan kaung deh", "phonetic": "ah yan kowng deh", "english": "delicious", "image": "food/delicious.svg", "audio": "", "difficulty": 2, "tags": ["phrase"] },
+        { "id": "i-want-this", "category": "food", "burmese": "ဒီဟာလိုချင်တယ်", "romanization": "di har lo chin deh", "phonetic": "dee hah lo chin deh", "english": "I want this", "image": "food/iwant.svg", "audio": "", "difficulty": 2, "tags": ["phrase"] },
+        { "id": "no-spicy", "category": "food", "burmese": "အစပ်မလိုဘူး", "romanization": "a sat ma lo bu", "phonetic": "ah saht muh lo boo", "english": "no spicy", "image": "food/nospicy.svg", "audio": "", "difficulty": 2, "tags": ["phrase"] },
+        { "id": "the-bill", "category": "food", "burmese": "ကျသင့်ငွေပေးပါ", "romanization": "kya thin ngway pay ba", "phonetic": "cha thin ngway pay bah", "english": "the bill please", "image": "food/bill.svg", "audio": "", "difficulty": 3, "tags": ["phrase"] }
+      ]
+    },
+    {
+      "id": "travel",
+      "label": "Travel & Directions",
+      "description": "Getting around and asking for help",
+      "color": "#2a9d8f",
+      "icon": "🗺️",
+      "items": [
+        { "id": "bathroom", "category": "travel", "burmese": "အိမ်သာဘယ်မှာလဲ", "romanization": "ein thar beh hma leh", "phonetic": "aine tha beh hma leh", "english": "where is the bathroom?", "image": "travel/bathroom.svg", "audio": "", "difficulty": 2, "tags": ["phrase"] },
+        { "id": "help", "category": "travel", "burmese": "ကူညီပါ", "romanization": "ku nyi ba", "phonetic": "koo nyee bah", "english": "help!", "image": "travel/help.svg", "audio": "", "difficulty": 1, "tags": ["emergency"] },
+        { "id": "stop", "category": "travel", "burmese": "ရပ်ပါ", "romanization": "yat ba", "phonetic": "yuht bah", "english": "stop", "image": "travel/stop.svg", "audio": "", "difficulty": 1, "tags": ["direction"] },
+        { "id": "go", "category": "travel", "burmese": "သွား", "romanization": "thwa", "phonetic": "thwah", "english": "go", "image": "travel/go.svg", "audio": "", "difficulty": 1, "tags": ["direction"] },
+        { "id": "left", "category": "travel", "burmese": "ဘယ်ဘက်", "romanization": "beh bet", "phonetic": "beh bet", "english": "left", "image": "travel/left.svg", "audio": "", "difficulty": 1, "tags": ["direction"] },
+        { "id": "right", "category": "travel", "burmese": "ညာဘက်", "romanization": "nya bet", "phonetic": "nyah bet", "english": "right", "image": "travel/right.svg", "audio": "", "difficulty": 1, "tags": ["direction"] },
+        { "id": "straight", "category": "travel", "burmese": "တည့်တည့်", "romanization": "teh teh", "phonetic": "teh teh", "english": "straight", "image": "travel/straight.svg", "audio": "", "difficulty": 1, "tags": ["direction"] },
+        { "id": "taxi", "category": "travel", "burmese": "တက္ကစီ", "romanization": "tek ka si", "phonetic": "tet kah see", "english": "taxi", "image": "travel/taxi.svg", "audio": "", "difficulty": 1, "tags": ["transport"] },
+        { "id": "bus", "category": "travel", "burmese": "ဘတ်စ်ကား", "romanization": "bus kar", "phonetic": "bus kah", "english": "bus", "image": "travel/bus.svg", "audio": "", "difficulty": 1, "tags": ["transport"] },
+        { "id": "train", "category": "travel", "burmese": "ရထား", "romanization": "ya htar", "phonetic": "yah htah", "english": "train", "image": "travel/train.svg", "audio": "", "difficulty": 1, "tags": ["transport"] },
+        { "id": "airport", "category": "travel", "burmese": "လေဆိပ်", "romanization": "lay sate", "phonetic": "lay sayt", "english": "airport", "image": "travel/airport.svg", "audio": "", "difficulty": 2, "tags": ["place"] },
+        { "id": "hotel", "category": "travel", "burmese": "ဟိုတယ်", "romanization": "hotel", "phonetic": "ho tell", "english": "hotel", "image": "travel/hotel.svg", "audio": "", "difficulty": 1, "tags": ["place"] }
+      ]
+    },
+    {
+      "id": "time",
+      "label": "Time & Numbers",
+      "description": "Numbers 1–10 and common time words",
+      "color": "#457b9d",
+      "icon": "🔢",
+      "items": [
+        { "id": "today", "category": "time", "burmese": "ဒီနေ့", "romanization": "di nay", "phonetic": "dee nay", "english": "today", "image": "time/today.svg", "audio": "", "difficulty": 1, "tags": ["time"] },
+        { "id": "tomorrow", "category": "time", "burmese": "မနက်ဖြန်", "romanization": "ma net phyan", "phonetic": "muh net pyan", "english": "tomorrow", "image": "time/tomorrow.svg", "audio": "", "difficulty": 1, "tags": ["time"] },
+        { "id": "yesterday", "category": "time", "burmese": "မနေ့က", "romanization": "ma nay ga", "phonetic": "muh nay gah", "english": "yesterday", "image": "time/yesterday.svg", "audio": "", "difficulty": 1, "tags": ["time"] },
+        { "id": "now", "category": "time", "burmese": "အခု", "romanization": "a khu", "phonetic": "ah khoo", "english": "now", "image": "time/now.svg", "audio": "", "difficulty": 1, "tags": ["time"] },
+        { "id": "later", "category": "time", "burmese": "နောက်မှ", "romanization": "nauk hma", "phonetic": "nowk hma", "english": "later", "image": "time/later.svg", "audio": "", "difficulty": 1, "tags": ["time"] },
+        { "id": "one", "category": "time", "burmese": "တစ်", "romanization": "tit", "phonetic": "tit", "english": "one", "image": "time/one.svg", "audio": "", "difficulty": 1, "tags": ["number"] },
+        { "id": "two", "category": "time", "burmese": "နှစ်", "romanization": "hnit", "phonetic": "hnit", "english": "two", "image": "time/two.svg", "audio": "", "difficulty": 1, "tags": ["number"] },
+        { "id": "three", "category": "time", "burmese": "သုံး", "romanization": "thone", "phonetic": "thohn", "english": "three", "image": "time/three.svg", "audio": "", "difficulty": 1, "tags": ["number"] },
+        { "id": "four", "category": "time", "burmese": "လေး", "romanization": "lay", "phonetic": "lay", "english": "four", "image": "time/four.svg", "audio": "", "difficulty": 1, "tags": ["number"] },
+        { "id": "five", "category": "time", "burmese": "ငါး", "romanization": "ngar", "phonetic": "ngah", "english": "five", "image": "time/five.svg", "audio": "", "difficulty": 1, "tags": ["number"] },
+        { "id": "six", "category": "time", "burmese": "ခြောက်", "romanization": "chauk", "phonetic": "chowk", "english": "six", "image": "time/six.svg", "audio": "", "difficulty": 1, "tags": ["number"] },
+        { "id": "seven", "category": "time", "burmese": "ခုနှစ်", "romanization": "khun hnit", "phonetic": "khoon hnit", "english": "seven", "image": "time/seven.svg", "audio": "", "difficulty": 2, "tags": ["number"] },
+        { "id": "eight", "category": "time", "burmese": "ရှစ်", "romanization": "shit", "phonetic": "sheet", "english": "eight", "image": "time/eight.svg", "audio": "", "difficulty": 2, "tags": ["number"] },
+        { "id": "nine", "category": "time", "burmese": "ကိုး", "romanization": "ko", "phonetic": "koe", "english": "nine", "image": "time/nine.svg", "audio": "", "difficulty": 2, "tags": ["number"] },
+        { "id": "ten", "category": "time", "burmese": "ဆယ်", "romanization": "seh", "phonetic": "sell", "english": "ten", "image": "time/ten.svg", "audio": "", "difficulty": 2, "tags": ["number"] }
+      ]
+    },
+    {
+      "id": "daily",
+      "label": "Daily Conversation",
+      "description": "Phrases for everyday situations",
+      "color": "#e9c46a",
+      "icon": "💬",
+      "items": [
+        { "id": "going-home", "category": "daily", "burmese": "အိမ်ပြန်မယ်", "romanization": "ein pyan meh", "phonetic": "aine pyan meh", "english": "I'm going home", "image": "daily/goinghome.svg", "audio": "", "difficulty": 2, "tags": ["phrase"] },
+        { "id": "wait-a-moment", "category": "daily", "burmese": "ခဏစောင့်ပါ", "romanization": "kha na saung ba", "phonetic": "khuh nah sowng bah", "english": "wait a moment", "image": "daily/wait.svg", "audio": "", "difficulty": 2, "tags": ["phrase"] },
+        { "id": "come-here", "category": "daily", "burmese": "ဒီကိုလာ", "romanization": "di go lar", "phonetic": "dee go lah", "english": "come here", "image": "daily/comehere.svg", "audio": "", "difficulty": 1, "tags": ["phrase"] },
+        { "id": "sit-down", "category": "daily", "burmese": "ထိုင်ပါ", "romanization": "htain ba", "phonetic": "htine bah", "english": "sit down", "image": "daily/sitdown.svg", "audio": "", "difficulty": 1, "tags": ["phrase"] },
+        { "id": "lets-eat", "category": "daily", "burmese": "စားရအောင်", "romanization": "sar ya aung", "phonetic": "sah yah owng", "english": "let's eat", "image": "daily/letseat.svg", "audio": "", "difficulty": 2, "tags": ["phrase"] },
+        { "id": "be-careful", "category": "daily", "burmese": "သတိထားပါ", "romanization": "tha di htar ba", "phonetic": "thuh dee htah bah", "english": "be careful", "image": "daily/careful.svg", "audio": "", "difficulty": 2, "tags": ["phrase"] },
+        { "id": "good-morning", "category": "daily", "burmese": "မင်္ဂလာနံနက်ခင်းပါ", "romanization": "mingalaba nanet khin ba", "phonetic": "ming ah lah bah na net khin bah", "english": "good morning", "image": "daily/goodmorning.svg", "audio": "", "difficulty": 2, "tags": ["greeting"] },
+        { "id": "good-night", "category": "daily", "burmese": "ကောင်းသောညပါ", "romanization": "kaung thaw nya ba", "phonetic": "kowng thaw nyah bah", "english": "good night", "image": "daily/goodnight.svg", "audio": "", "difficulty": 2, "tags": ["greeting"] },
+        { "id": "congratulations", "category": "daily", "burmese": "ဂုဏ်ယူပါတယ်", "romanization": "gon yu ba deh", "phonetic": "gone yoo bah deh", "english": "congratulations", "image": "daily/congrats.svg", "audio": "", "difficulty": 3, "tags": ["phrase"] },
+        { "id": "happy-birthday", "category": "daily", "burmese": "မွေးနေ့မင်္ဂလာပါ", "romanization": "mway nay mingalaba", "phonetic": "mway nay ming ah lah bah", "english": "happy birthday", "image": "daily/birthday.svg", "audio": "", "difficulty": 2, "tags": ["phrase"] },
+        { "id": "i-miss-you", "category": "daily", "burmese": "လွမ်းတယ်", "romanization": "lwan deh", "phonetic": "lwoom deh", "english": "I miss you", "image": "daily/missyou.svg", "audio": "", "difficulty": 2, "tags": ["emotion"] },
+        { "id": "good-luck", "category": "daily", "burmese": "ကံကောင်းပါစေ", "romanization": "kan kaung ba say", "phonetic": "kahn kowng bah say", "english": "good luck", "image": "daily/goodluck.svg", "audio": "", "difficulty": 2, "tags": ["phrase"] }
+      ]
+    }
+  ]
+}
