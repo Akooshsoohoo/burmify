@@ -7,7 +7,7 @@ import { PronunciationLabel } from './PronunciationLabel';
 interface Props {
   item: VocabularyItem;
   mode: CardSide;
-  size?: 'center' | 'corner';
+  size?: 'center' | 'corner' | 'diamond';
   isOver?: boolean;
   accentColor?: string;
   className?: string;
@@ -16,7 +16,7 @@ interface Props {
 export function Card({ item, mode, size = 'corner', isOver = false, accentColor, className = '' }: Props) {
   const [imgError, setImgError] = useState(false);
   const isCenter = size === 'center';
-  const sizeClass = isCenter ? 'w-[38vmin] h-[38vmin]' : 'w-[28vmin] h-[28vmin]';
+  const sizeClass = size === 'center' ? 'w-[38vmin] h-[38vmin]' : size === 'diamond' ? 'w-[22vmin] h-[22vmin]' : 'w-[28vmin] h-[28vmin]';
 
   const borderStyle = isOver
     ? { borderColor: 'var(--accent-correct)', boxShadow: `0 0 20px var(--accent-correct)40` }
@@ -52,13 +52,13 @@ export function Card({ item, mode, size = 'corner', isOver = false, accentColor,
 
       {mode === 'burmese' && (
         <>
-          <BurmeseText text={item.burmese} size={isCenter ? 'xl' : 'lg'} />
+          <BurmeseText text={item.burmese} size={isCenter ? 'xl' : size === 'diamond' ? 'sm' : 'lg'} />
           <PronunciationLabel romanization={item.romanization} phonetic={item.phonetic} />
         </>
       )}
 
       {mode === 'english' && (
-        <span className={`font-semibold text-center px-2 text-[var(--text-primary)] ${isCenter ? 'text-3xl' : 'text-xl'}`}>
+        <span className={`font-semibold text-center px-2 text-[var(--text-primary)] ${isCenter ? 'text-3xl' : size === 'diamond' ? 'text-base' : 'text-xl'}`}>
           {item.english}
         </span>
       )}

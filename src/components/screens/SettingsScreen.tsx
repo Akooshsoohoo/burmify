@@ -13,7 +13,7 @@ const pronunciationOptions: { value: PronunciationDisplay; label: string; desc: 
 ];
 
 export function SettingsScreen({ onBack }: Props) {
-  const { pronunciationDisplay, setPronunciationDisplay, audioEnabled, toggleAudio, showBurmeseScript, toggleBurmeseScript } = useSettingsStore();
+  const { pronunciationDisplay, setPronunciationDisplay, audioEnabled, toggleAudio, showBurmeseScript, toggleBurmeseScript, layoutMode, toggleLayoutMode } = useSettingsStore();
 
   return (
     <div className="flex flex-col h-full" style={{ background: 'var(--bg-primary)' }}>
@@ -50,6 +50,51 @@ export function SettingsScreen({ onBack }: Props) {
               />
             </div>
           </button>
+        </section>
+
+        <section>
+          <p className="text-xs font-semibold uppercase tracking-widest mb-3" style={{ color: 'var(--text-muted)' }}>
+            Quiz layout
+          </p>
+          <div className="flex gap-2">
+            {(['corners', 'diamond'] as const).map((mode) => (
+              <button
+                key={mode}
+                onClick={() => mode !== layoutMode && toggleLayoutMode()}
+                className="flex-1 flex flex-col items-center gap-2 px-3 py-3 rounded-2xl border-2 transition-all"
+                style={{
+                  background: layoutMode === mode ? 'var(--card-border)' : 'var(--card-surface)',
+                  borderColor: layoutMode === mode ? 'var(--accent-correct)' : 'var(--card-border)',
+                }}
+              >
+                {mode === 'corners' ? (
+                  <div className="grid grid-cols-2 gap-1 w-10 h-10">
+                    {[0,1,2,3].map(i => <div key={i} className="rounded-sm" style={{ background: layoutMode === 'corners' ? 'var(--accent-correct)' : 'var(--text-muted)', opacity: layoutMode === 'corners' ? 0.8 : 0.3 }} />)}
+                  </div>
+                ) : (
+                  <div className="relative w-10 h-10">
+                    {[
+                      'absolute top-0 left-1/2 -translate-x-1/2 w-3 h-3',
+                      'absolute bottom-0 left-1/2 -translate-x-1/2 w-3 h-3',
+                      'absolute left-0 top-1/2 -translate-y-1/2 w-3 h-3',
+                      'absolute right-0 top-1/2 -translate-y-1/2 w-3 h-3',
+                      'absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-3 h-3',
+                    ].map((cls, i) => (
+                      <div key={i} className={`${cls} rounded-sm`} style={{ background: layoutMode === 'diamond' ? 'var(--accent-correct)' : 'var(--text-muted)', opacity: layoutMode === 'diamond' ? (i === 4 ? 0.4 : 0.8) : 0.3 }} />
+                    ))}
+                  </div>
+                )}
+                <span className="text-xs font-semibold capitalize" style={{ color: layoutMode === mode ? 'var(--text-primary)' : 'var(--text-muted)' }}>
+                  {mode}
+                </span>
+                {mode === 'diamond' && (
+                  <span className="text-xs text-center" style={{ color: 'var(--text-muted)', lineHeight: 1.3 }}>
+                    WASD / arrows
+                  </span>
+                )}
+              </button>
+            ))}
+          </div>
         </section>
 
         <section>

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { motion } from 'framer-motion';
 import { X } from 'lucide-react';
 import { useSessionStore } from '../../store/sessionStore';
@@ -19,10 +19,15 @@ export function ExposureScreen({ accentColor, completed, total, onPause }: Props
   const { recordExposure } = useProgressStore();
   const [imgError, setImgError] = useState(false);
 
-  const handleConfirm = () => {
+  const handleConfirm = useCallback(() => {
     if (currentExposureItem) recordExposure(currentExposureItem.id);
     confirmExposure();
-  };
+  }, [currentExposureItem, recordExposure, confirmExposure]);
+
+  useEffect(() => {
+    window.addEventListener('keydown', handleConfirm);
+    return () => window.removeEventListener('keydown', handleConfirm);
+  }, [handleConfirm]);
 
   if (!currentExposureItem) return null;
   const item = currentExposureItem;
