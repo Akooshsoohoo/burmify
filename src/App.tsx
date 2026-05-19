@@ -20,12 +20,13 @@ interface Cat {
   words: Word[];
 }
 
+interface SentToken { burmese: string; roman: string; phonetic: string; }
+
 interface SentEx {
-  burmese: string[];
+  tokens: SentToken[];
   blankIndex: number;
-  answer: string;
-  options: string[];
-  optionsEn: string[];
+  answer: string;    // English correct answer
+  options: string[]; // English choices
   fullEn: string;
 }
 
@@ -55,28 +56,37 @@ const A = {
 
 const SENTENCES: SentEx[] = [
   {
-    burmese: ['ကျွန်တော်', '___', 'သောက်ချင်တယ်'],
+    tokens: [
+      { burmese: 'ကျွန်တော်', roman: 'kyun taw',       phonetic: 'kyun taw' },
+      { burmese: 'ရေ',         roman: 'yay',             phonetic: 'yay' },
+      { burmese: 'သောက်ချင်တယ်', roman: 'thaut chin deh', phonetic: 'thowk chin deh' },
+    ],
     blankIndex: 1,
-    answer: 'ရေ',
-    options: ['ထမင်း', 'ရေ', 'လက်ဖက်ရည်', 'ကော်ဖီ'],
-    optionsEn: ['rice', 'water', 'tea', 'coffee'],
+    answer: 'water',
+    options: ['water', 'rice', 'tea', 'coffee'],
     fullEn: 'I want to drink water.',
   },
   {
-    burmese: ['ကျွန်တော်', '___', 'ဆာတယ်'],
+    tokens: [
+      { burmese: 'ကျွန်တော်', roman: 'kyun taw',   phonetic: 'kyun taw' },
+      { burmese: 'ဗိုက်ဆာ',   roman: 'bite sar',   phonetic: 'byke sah' },
+      { burmese: 'တယ်',        roman: 'deh',         phonetic: 'deh' },
+    ],
     blankIndex: 1,
-    answer: 'ဗိုက်',
-    options: ['ဗိုက်', 'ခေါင်း', 'ထမင်း', 'ရေ'],
-    optionsEn: ['belly/hungry', 'head', 'rice', 'water'],
+    answer: 'hungry',
+    options: ['hungry', 'thirsty', 'tired', 'good'],
     fullEn: 'I am hungry.',
   },
   {
-    burmese: ['ဒီနေ့', 'ပူ', '___'],
-    blankIndex: 2,
-    answer: 'တယ်',
-    options: ['တယ်', 'ဘူး', 'လား', 'ပါ'],
-    optionsEn: ['(statement)', '(negative)', '(question)', '(polite)'],
-    fullEn: 'It is hot today.',
+    tokens: [
+      { burmese: 'ဒါ',  roman: 'da',  phonetic: 'dah' },
+      { burmese: 'ဘာ',  roman: 'ba',  phonetic: 'bah' },
+      { burmese: 'လဲ',  roman: 'leh', phonetic: 'leh' },
+    ],
+    blankIndex: 1,
+    answer: 'what',
+    options: ['what', 'where', 'who', 'how'],
+    fullEn: 'What is this?',
   },
 ];
 
@@ -635,6 +645,7 @@ function SettingsScreen({ onBack }: { onBack: () => void }) {
 // ── Sentence screen ───────────────────────────────────────────────────────────
 
 function SentenceScreen({ sentences, onDone }: { sentences: SentEx[]; onDone: () => void }) {
+  const { showBurmeseScript, pronunciationDisplay } = useSettingsStore();
   const [idx, setIdx] = useState(0);
   const [picked, setPicked] = useState<number | null>(null);
 
@@ -650,11 +661,33 @@ function SentenceScreen({ sentences, onDone }: { sentences: SentEx[]; onDone: ()
           onDone();
         } else {
           setPicked(null);
-          setIdx(i => i + 1);
+          setIdx(n => n + 1);
         }
       }, 900);
     }
   }
+
+  function romanFor(tok: SentToken) {
+    if (pronunciationDisplay === 'phonetic') return tok.phonetic;
+    if (pronunciationDisplay === 'both') return `${tok.roman} · ${tok.phonetic}`;
+    return tok.roman;
+  }
+
+  function TokenDisplay({ tok }: { tok: SentToken }) {
+    if (!showBurmeseScript) {
+      return <span style={{ fontFamily: A.sans, fontSize: 20, color: A.ink }}>{romanFor(tok)}</span>;
+    }
+    return (
+      <span style={{ display: 'inline-flex', flexDirection: 'column', alignItems: 'center', gap: 2 }}>
+        <span style={{ fontFamily: A.bur, fontSize: 28, color: A.ink, lineHeight: 1.2 }}>{tok.burmese}</span>
+        <span style={{ fontFamily: A.sans, fontSize: 11, color: A.muted }}>{romanFor(tok)}</span>
+      </span>
+    );
+  }
+
+  const blankColor = picked == null ? A.ink : picked === correctIdx ? A.good : A.bad;
+  const blankBg = picked == null ? 'transparent'
+    : picked === correctIdx ? 'oklch(48% 0.11 145 / 0.08)' : 'oklch(50% 0.16 25 / 0.08)';
 
   return (
     <div style={{ background: A.bg, minHeight: '100%', display: 'flex', flexDirection: 'column' }}>
@@ -663,7 +696,7 @@ function SentenceScreen({ sentences, onDone }: { sentences: SentEx[]; onDone: ()
           <Icon name="x" size={13} color={A.inkSoft} strokeWidth={1.8} />
         </button>
         <div style={{ flex: 1, height: 4, background: A.rule, borderRadius: 999, overflow: 'hidden' }}>
-          <div style={{ width: `${((idx) / sentences.length) * 100}%`, height: '100%', background: A.accent }} />
+          <div style={{ width: `${(idx / sentences.length) * 100}%`, height: '100%', background: A.accent }} />
         </div>
         <span style={{ fontFamily: A.serif, fontSize: 13, fontStyle: 'italic', color: A.muted, fontVariantNumeric: 'tabular-nums' }}>
           {idx + 1}/{sentences.length}
@@ -676,34 +709,36 @@ function SentenceScreen({ sentences, onDone }: { sentences: SentEx[]; onDone: ()
         </div>
       </div>
 
+      {/* Sentence with blank */}
       <div style={{ padding: '0 24px', textAlign: 'center', marginTop: 10 }}>
-        <div style={{ fontFamily: A.bur, fontSize: 30, lineHeight: 1.5, color: A.ink, marginBottom: 18 }}>
-          {s.burmese.map((tok, i) => (
-            <span key={i} style={{ display: 'inline-block', marginRight: 6 }}>
-              {i === s.blankIndex ? (
-                <span style={{
-                  display: 'inline-block', minWidth: 90,
-                  padding: '2px 14px', borderBottom: `2px solid ${A.accent}`,
-                  color: picked != null ? (picked === correctIdx ? A.good : A.bad) : A.ink,
-                  background: picked != null ? (picked === correctIdx ? 'oklch(48% 0.11 145 / 0.08)' : 'oklch(50% 0.16 25 / 0.08)') : 'transparent',
-                  borderRadius: '4px 4px 0 0',
-                }}>
-                  {picked != null ? s.options[picked] : '?'}
-                </span>
-              ) : tok}
-            </span>
-          ))}
+        <div style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center', alignItems: 'flex-end', gap: 10, marginBottom: 20 }}>
+          {s.tokens.map((tok, i) =>
+            i === s.blankIndex ? (
+              <span key={i} style={{
+                display: 'inline-block', minWidth: 80,
+                padding: '4px 14px', borderBottom: `2px solid ${A.accent}`,
+                color: blankColor, background: blankBg,
+                borderRadius: '4px 4px 0 0', transition: 'all 0.2s',
+                fontFamily: A.serif, fontStyle: 'italic', fontSize: 20,
+              }}>
+                {picked != null ? s.options[picked] : '?'}
+              </span>
+            ) : (
+              <span key={i}><TokenDisplay tok={tok} /></span>
+            )
+          )}
         </div>
-        <div style={{ fontFamily: A.serif, fontStyle: 'italic', fontSize: 16, color: A.inkSoft, lineHeight: 1.5 }}>
+        <div style={{ fontFamily: A.serif, fontStyle: 'italic', fontSize: 15, color: A.inkSoft, lineHeight: 1.5 }}>
           "{s.fullEn}"
         </div>
       </div>
 
       <div style={{ flex: 1 }} />
 
+      {/* English options */}
       <div style={{ padding: '20px 24px 24px' }}>
         <div style={{ fontFamily: A.sans, fontSize: 10, letterSpacing: '0.22em', textTransform: 'uppercase', color: A.muted, marginBottom: 12 }}>
-          Choose a word
+          Choose the English meaning
         </div>
         <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 10 }}>
           {s.options.map((opt, i) => {
@@ -711,16 +746,14 @@ function SentenceScreen({ sentences, onDone }: { sentences: SentEx[]; onDone: ()
             const isWrong = picked === i && i !== correctIdx;
             return (
               <button key={i} onClick={() => choose(i)} style={{
-                padding: '14px 12px', borderRadius: 12, cursor: 'pointer',
+                padding: '16px 12px', borderRadius: 12, cursor: 'pointer',
                 background: isCorrect ? A.good : isWrong ? A.bad : A.paper,
                 color: isCorrect || isWrong ? A.onAccent : A.ink,
                 border: `1px solid ${isCorrect ? A.good : isWrong ? A.bad : A.rule}`,
-                fontFamily: A.bur, fontSize: 22, transition: 'all 0.2s',
+                fontFamily: A.serif, fontStyle: 'italic', fontSize: 18,
+                transition: 'all 0.2s',
               }}>
-                <div>{opt}</div>
-                <div style={{ fontFamily: A.serif, fontStyle: 'italic', fontSize: 11, color: isCorrect || isWrong ? 'rgba(255,255,255,0.8)' : A.muted, marginTop: 4 }}>
-                  {s.optionsEn[i]}
-                </div>
+                {opt}
               </button>
             );
           })}
