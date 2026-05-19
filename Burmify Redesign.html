@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>Burmify · Redesign Exploration</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<!-- Fonts: Newsreader + Geist + Noto Sans Myanmar (A);  -->
+<!--        Space Grotesk + JetBrains Mono + Noto Sans Myanmar (B) -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400;1,6..72,500;1,6..72,600&family=Geist:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Noto+Sans+Myanmar:wght@400;500;700&display=swap" rel="stylesheet">
+
+<style>
+  html, body { margin: 0; padding: 0; background: #f0eee9; height: 100%; }
+  body {
+    font-family: 'Geist', system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+  #root { height: 100vh; width: 100vw; }
+
+  /* Hide all scrollbars inside the device frames for a cleaner look. */
+  [data-phone], [data-phone] * { scrollbar-width: none; }
+  [data-phone] ::-webkit-scrollbar { display: none; width: 0; height: 0; }
+</style>
+</head>
+<body>
+<div id="root"></div>
+
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+
+<script type="text/babel" src="data.jsx"></script>
+<script type="text/babel" src="ios-frame.jsx"></script>
+<script type="text/babel" src="design-canvas.jsx"></script>
+<script type="text/babel" src="direction-a.jsx"></script>
+
+<script type="text/babel">
+  const { DesignCanvas, DCSection, DCArtboard, DCPostIt } = window;
+
+  // iPhone-ish artboard size. IOSDevice frame defaults to 402×874; we use
+  // a slightly tighter size that still feels phone-shaped.
+  const PHONE_W = 402;
+  const PHONE_H = 860;
+
+  function Phone({ children, dark }) {
+    return (
+      <div data-phone style={{
+        width: PHONE_W, height: PHONE_H,
+        display: 'grid', placeItems: 'center',
+        background: dark ? '#0d0d10' : '#ece8df',
+      }}>
+        <IOSDevice width={PHONE_W - 24} height={PHONE_H - 24} dark={dark}>
+          <div className="phone-scroll" style={{
+            height: '100%', paddingTop: 56, /* status bar clearance */
+            background: dark ? window.AThemeTokensDark.bg : window.AThemeTokens.bg,
+            overflowX: 'hidden',
+          }}>
+            {children}
+          </div>
+        </IOSDevice>
+      </div>
+    );
+  }
+
+  function App() {
+    return (
+      <DesignCanvas storageKey="burmify-redesign-v2" title="Burmify · Atelier"
+        subtitle="Same design in two themes. Switch between them with the iOS system theme, or expose a toggle in Settings.">
+
+        <DCSection id="atelier-light" title="Atelier · Light"
+          subtitle="Warm cream paper, deep terracotta, editorial serif. Default appearance.">
+          <DCArtboard id="a-light" label="Light · interactive" width={PHONE_W} height={PHONE_H}>
+            <Phone dark={false}>
+              <DirectionA />
+            </Phone>
+          </DCArtboard>
+        </DCSection>
+
+        <DCSection id="atelier-dark" title="Atelier · Dark"
+          subtitle="Warm ink (not navy), brighter terracotta, same fonts and rhythm. The two themes share one set of tokens — only the color values change.">
+          <DCArtboard id="a-dark" label="Dark · interactive" width={PHONE_W} height={PHONE_H}>
+            <Phone dark={true}>
+              <DirectionADark />
+            </Phone>
+          </DCArtboard>
+        </DCSection>
+
+      </DesignCanvas>
+    );
+  }
+
+  ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+</script>
+
+</body>
+</html>

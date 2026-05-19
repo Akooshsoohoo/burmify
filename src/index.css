@@ -2,18 +2,6 @@
 @import '@fontsource/noto-sans-myanmar/700.css';
 @import "tailwindcss";
 
-:root {
-  --bg-primary: #0f0f1a;
-  --bg-secondary: #1a1a2e;
-  --card-surface: #16213e;
-  --card-border: #0f3460;
-  --accent-correct: #06d6a0;
-  --accent-wrong: #ef476f;
-  --accent-gold: #ffd166;
-  --text-primary: #e8e8f0;
-  --text-muted: #8888aa;
-}
-
 * {
   box-sizing: border-box;
   margin: 0;
@@ -21,25 +9,20 @@
 }
 
 body {
-  background-color: var(--bg-primary);
-  color: var(--text-primary);
-  font-family: system-ui, 'Segoe UI', sans-serif;
+  background-color: oklch(96.5% 0.012 80);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
   overflow: hidden;
   user-select: none;
-  -webkit-font-smoothing: antialiased;
 }
 
 #root {
   width: 100%;
   height: 100svh;
-  display: flex;
-  flex-direction: column;
 }
 
-.burmese {
-  font-family: 'Noto Sans Myanmar', sans-serif;
-  text-rendering: optimizeLegibility;
-  font-feature-settings: "kern" 1;
+button {
+  font-family: inherit;
 }
 
 @media (prefers-reduced-motion: reduce) {
