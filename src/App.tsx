@@ -1,4 +1,4 @@
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect } from 'react';
 import type { CSSProperties } from 'react';
 import vocabularyData from './data/vocabulary.json';
 import type { Category as RawCategory, PronunciationDisplay } from './data/vocabulary.types';
@@ -304,6 +304,7 @@ function GameScreen({ cat, onPause, onComplete, allWords }: {
   allWords: Word[];
 }) {
   const { recordResult, incrementSessions } = useProgressStore();
+  const { showBurmeseScript } = useSettingsStore();
   const total = Math.min(cat.words.length, 8);
   const wordPool = useMemo(() => {
     const catWords = cat.words;
@@ -345,6 +346,22 @@ function GameScreen({ cat, onPause, onComplete, allWords }: {
 
   const hints = ['W', 'D', 'S', 'A'];
 
+  // WASD / arrow-key navigation — same layout as the visual diamond
+  useEffect(() => {
+    const keyMap: Record<string, number> = {
+      w: 0, arrowup: 0,
+      d: 1, arrowright: 1,
+      s: 2, arrowdown: 2,
+      a: 3, arrowleft: 3,
+    };
+    function onKey(e: KeyboardEvent) {
+      const idx = keyMap[e.key.toLowerCase()];
+      if (idx !== undefined) { e.preventDefault(); pick(idx); }
+    }
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  });
+
   return (
     <div style={{ background: A.bg, minHeight: '100%', display: 'flex', flexDirection: 'column', position: 'relative' }}>
       {/* Top bar */}
@@ -377,8 +394,10 @@ function GameScreen({ cat, onPause, onComplete, allWords }: {
         <div style={{ position: 'absolute', top: 14, left: 18, fontFamily: A.sans, fontSize: 9, letterSpacing: '0.2em', color: A.muted, textTransform: 'uppercase' }}>
           Word {round + 1}
         </div>
-        <div style={{ fontFamily: A.bur, fontSize: 44, lineHeight: 1.15, color: A.ink, marginTop: 8 }}>{question.burmese}</div>
-        <div style={{ fontFamily: A.serif, fontSize: 17, fontStyle: 'italic', color: A.inkSoft, marginTop: 10 }}>{question.roman}</div>
+        {showBurmeseScript && (
+          <div style={{ fontFamily: A.bur, fontSize: 44, lineHeight: 1.15, color: A.ink, marginTop: 8 }}>{question.burmese}</div>
+        )}
+        <div style={{ fontFamily: A.serif, fontSize: showBurmeseScript ? 17 : 36, fontStyle: 'italic', color: showBurmeseScript ? A.inkSoft : A.ink, marginTop: showBurmeseScript ? 10 : 8, fontWeight: showBurmeseScript ? 400 : 500 }}>{question.roman}</div>
       </div>
 
       {/* Prompt */}
@@ -441,6 +460,7 @@ function StatBlock({ label, value }: { label: string; value: number }) {
 function ResultsScreen({ cat, score, total, onReplay, onHome }: {
   cat: Cat; score: number; total: number; onReplay: () => void; onHome: () => void;
 }) {
+  const { showBurmeseScript } = useSettingsStore();
   const pct = total > 0 ? Math.round((score / total) * 100) : 0;
   const preview = cat.words.slice(0, 6);
 
@@ -494,8 +514,10 @@ function ResultsScreen({ cat, score, total, onReplay, onHome }: {
             display: 'flex', alignItems: 'center', gap: 14, padding: '10px 0',
             borderBottom: i === preview.length - 1 ? 'none' : `1px solid ${A.rule}`,
           }}>
-            <span style={{ fontFamily: A.bur, fontSize: 18, color: A.ink, minWidth: 90 }}>{w.burmese}</span>
-            <span style={{ flex: 1, fontFamily: A.serif, fontStyle: 'italic', fontSize: 14, color: A.inkSoft }}>{w.en}</span>
+            {showBurmeseScript && (
+              <span style={{ fontFamily: A.bur, fontSize: 18, color: A.ink, minWidth: 90 }}>{w.burmese}</span>
+            )}
+            <span style={{ flex: 1, fontFamily: A.serif, fontStyle: 'italic', fontSize: 14, color: A.inkSoft }}>{w.roman} — {w.en}</span>
             <Icon name="check" size={14} color={A.good} strokeWidth={2} />
           </div>
         ))}
@@ -559,7 +581,7 @@ function Segmented({ value, onChange, options }: {
 }
 
 function SettingsScreen({ onBack }: { onBack: () => void }) {
-  const { pronunciationDisplay, audioEnabled, setPronunciationDisplay, toggleAudio } = useSettingsStore();
+  const { pronunciationDisplay, audioEnabled, showBurmeseScript, setPronunciationDisplay, toggleAudio, toggleBurmeseScript } = useSettingsStore();
   const { wordProgress } = useProgressStore();
   const totalSeen = Object.keys(wordProgress).length;
 
@@ -591,6 +613,7 @@ function SettingsScreen({ onBack }: { onBack: () => void }) {
 
       <SectionLabel style={{ marginTop: 26, marginBottom: 8 }}>Session</SectionLabel>
       <div style={{ padding: '0 24px' }}>
+        <ToggleRow label="Burmese script" sub="Show မြန်မာ characters on cards." value={showBurmeseScript} onChange={toggleBurmeseScript} />
         <ToggleRow label="Sound" sub="Spoken Burmese on each card." value={audioEnabled} onChange={toggleAudio} />
       </div>
 
